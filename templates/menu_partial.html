@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+        {% if restaurant_food %}
+            <h3>Меню</h3>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Название</th>
+                    <th>Цена</th>
+                </tr>
+                {% for food in restaurant_food %}
+                <tr>
+                    <td>{{ food.idFoods}}</td>
+                    <td>{{ food.name }}</td>
+                    <td>{{ food.price}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+{% endblock %}

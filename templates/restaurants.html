@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Секция ресторанов -->
+<div class="section">
+    <form method="GET" action="/restaurants">
+        <h2>Рестораны</h2>
+        <div id="restaurants-list">
+            <!-- {% if restaurants %} -->
+            <h3>Список ресторанов</h3>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Название</th>
+                    <th>Адрес</th>
+                </tr>
+                {% for restaurant in restaurants %}
+                <tr>
+                    <td>{{ restaurant.idRestaurants }}</td>
+                    <td>{{ restaurant.name }}</td>
+                    <td>{{ restaurant.address }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            <!-- {% endif %} -->
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Секция меню -->
+<div class="section">
+    <h2>Меню ресторана</h2>
+    <div class="form-group">
+        <label for="restaurant-id">Выберите ресторан:</label>
+        <select id="restaurant-id">
+            {% for menu in restaurant_menus %}
+                <!-- <option value="">{{ menu.name }}</option> -->
+                <option value="{{ menu.idRestaurants }}">{{ menu.name }}</option>
+                <!-- <option value="">{{ menu.idRestaurants }} {{menu.name }}</option> -->
+            {% endfor %}
+        </select>
+        <button id="load-menu-button">Загрузить меню</button>
+    </div>
+    <div id="menu-list">
+        {% if restaurant_food %}
+            <h3>Меню</h3>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Название</th>
+                    <th>Цена</th>
+                </tr>
+                {% for food in restaurant_food %}
+                <tr>
+                    <td>{{ food.idFoods}}</td>
+                    <td>{{ food.name }}</td>
+                    <td>{{ food.price}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+    </div>
+</div>
+<script>
+    document.getElementById("load-menu-button").addEventListener("click", function() {
+        const restaurantId = document.getElementById("restaurant-id").value;
+
+        fetch(`/restaurants/menu/${restaurantId}`) // Отправляем GET-запрос
+            .then(response => response.text()) // Получаем HTML-ответ
+            .then(data => {
+                document.getElementById("menu-list").innerHTML = data; // Вставляем HTML в div
+            })
+            .catch(error => {
+                console.error("Ошибка:", error);
+                document.getElementById("menu-list").innerHTML = "<p>Ошибка загрузки меню.</p>";
+            });
+    });
+</script>
+{% endblock %}

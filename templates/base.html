@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Система заказов еды</title>
+    <style>
+        header {
+            margin: 0;
+            padding: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 8%;
+            box-shadow: 0 5px 10px #000;
+            text-decoration: none;
+            z-index: 2;
+        }
+
+        header nav {
+            width: auto;
+        }
+
+        header nav ul li {
+            z-index: auto;
+            list-style: none;
+            text-decoration: none;
+            position: relative;
+            float: left;
+        }
+
+        header nav ul li a{
+            position: relative;
+            z-index: 2;
+            text-decoration: none;
+            padding: 15px;
+            color: #000;
+            font-size: 16px;
+            display: block;
+        }
+
+        header nav ul li a:hover{
+            background: #000;
+            color: #fff;
+        }
+
+        nav ul li ul {
+            margin: 0;
+            padding: 0;
+            z-index: 2;
+            position: absolute;
+            left: 0;
+            width: 180px;
+            background: #fff;
+            display: none;
+        } 
+
+        header nav ul li:hover > ul{
+            display: initial;
+        }
+
+        nav ul li ul li {
+            width: 100%;
+            position: relative;
+            z-index: 2;
+            border: 1px solid rgba(0, 0, 0, 0.12);
+        }
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .section {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        button, input, select {
+            padding: 8px 12px;
+            margin: 5px 0;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .error {
+            color: red;
+        }
+        .success {
+            color: green;
+        }
+    </style>
+</head>
+<header>
+    <nav>
+        <ul>
+            <li><a href='/users'>Пользователи</a></li>
+            <li><a href='/restaurants'>Рестораны</a></li>
+            <li><a href='/restaurants/menu'>Меню ресторанов</a></li>
+            <li><a href='#'>Заказы ⥥</a>
+                <ul>
+                    <li><a href='/view_orders'>Статус заказов</a></li>
+                    <li><a href='/create_order'>Создать заказ</a></li>                    
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</header>
+<br></br>
+<body>
+    <h1>Система управления заказами еды</h1>
+    {% block content %}{% endblock %}
+</body>
+</html>
