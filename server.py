@@ -38,6 +38,11 @@ def send_message(queue_name, message):
     channel.basic_publish(exchange='', routing_key=queue_name, body=message)
     connection.close()
 
+@app.route("/", methods=['GET', 'POST'])
+def index():
+        return render_template('base.html')
+
+
 @app.route('/users', methods=['GET'])
 def users():
     db = get_db()
@@ -66,7 +71,7 @@ def restaurants():
     db = get_db()
     try:
         with db.cursor() as cursor:
-            cursor.execute("SELECT * FROM restaurants")
+            cursor.execute("SELECT * FROM Restaurants")
             restaurants = cursor.fetchall()
             return render_template('restaurants.html', restaurants=restaurants)
     except Exception as e:
@@ -77,7 +82,7 @@ def get_restaurants():
     db = get_db()
     try:
         with db.cursor() as cursor:
-            cursor.execute("SELECT idRestaurants, name FROM restaurants")
+            cursor.execute("SELECT idRestaurants, name FROM Restaurants")
             restaurant_menus = cursor.fetchall()
             return render_template('menu_restaurant.html', restaurant_menus=restaurant_menus)
     except Exception as e:
@@ -103,8 +108,8 @@ def view_orders():
     try:
         with db.cursor() as cursor:
             cursor.execute("""SELECT o.idOrders, o.order_date, o.status, u.name AS user_name
-                              FROM orders o
-                              INNER JOIN users u ON o.Users_idUsers = u.idUsers
+                              FROM Orders o
+                              INNER JOIN Users u ON o.Users_idUsers = u.idUsers
                               WHERE o.status NOT IN ('completed', 'cancelled')""")
             orders = cursor.fetchall()
             cursor.execute("SELECT idUsers, name FROM Users")
